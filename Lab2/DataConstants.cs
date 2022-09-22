@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Lab2 {
     public static class DataConstants {
-        
+        public const String test = "test";
     }
 }
