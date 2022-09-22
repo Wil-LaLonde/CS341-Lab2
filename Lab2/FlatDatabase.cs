@@ -9,7 +9,7 @@ namespace Lab2 {
             entries = GetStoredEntries();
         }
 
-        public ObservableCollection<Entry> GetStoredEntries() {
+        private ObservableCollection<Entry> GetStoredEntries() {
             ObservableCollection<Entry> entries = new ObservableCollection<Entry>();
             //Check if the file exists.
             if (File.Exists(FileName)) {
@@ -40,22 +40,23 @@ namespace Lab2 {
         public bool DeleteEntry(int id) {
             //Removing the given id.
             entries.RemoveAt(id);
-            //When removing the entry, need to re-index all the other entries (id values)
+            //When removing the entry, need to re-index all the other entries (id values).
+            int index = DataConstants.One;
             foreach (Entry entry in entries) {
-                entry.Id++;
+                entry.Id = index++;
             }
             //Update the "database" and return if it was successful or not.
             return WriteCurrentDataToFile();
         }
 
         public bool EditEntry(Entry entry, int id) {
-            //Add the given entry at the specific id.
+            //Replace the old entry with the new one.
             entries[id] = entry;
             //Update the "database" and return if it was successful or not.
             return WriteCurrentDataToFile();
         }
 
-        public bool WriteCurrentDataToFile() {
+        private bool WriteCurrentDataToFile() {
             bool successFlatDatabaseCall;
             try {
                 //Try adding the data to the text file.
