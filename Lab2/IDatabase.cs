@@ -2,6 +2,9 @@
 using System.Collections.ObjectModel;
 
 namespace Lab2 {
+    /**
+     * IDatabase interface.
+     */
     public interface IDatabase {
         public ObservableCollection<Entry> GetEntries();
         public int GetCurrentCollectionSize();

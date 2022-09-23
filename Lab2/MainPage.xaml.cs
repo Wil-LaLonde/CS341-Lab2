@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-
 namespace Lab2;
 
 public partial class MainPage : ContentPage {

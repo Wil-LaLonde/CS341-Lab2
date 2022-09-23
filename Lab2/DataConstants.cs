@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lab2 {
+﻿namespace Lab2 {
+    /**
+     * DataConstants class holds all values used throughout Lab2. This
+     * is to ensure there are not "magic" values floating around.
+     */
     public static class DataConstants {
         //General Items START
         public const int Zero = 0;

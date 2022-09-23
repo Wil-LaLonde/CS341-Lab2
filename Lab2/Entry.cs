@@ -1,8 +1,10 @@
-﻿using System;
-
-namespace Lab2 {
+﻿namespace Lab2 {
     [Serializable()]
+    /**
+     * The Entry class represents different crossword entries.
+     */
     public class Entry {
+        //Instance variables used for getters/setters.
         private int id;
         private String clue;
         private String answer;
@@ -14,11 +16,11 @@ namespace Lab2 {
         public const int InvalidDifficultyEntry = -1;
         public const String InvalidStringEntry = "";
 
-        //Maybe find a way to have the setter methods contain the logic for an Entry???
+        
         public int Id {
             get { return id; }
             set {
-                //Try and set the value only if it fits the requirements.
+                //Valid id -> any int value that is greater than 0.
                 if(value > InvalidIdEntry) {
                     id = value;
                 } else {
@@ -33,6 +35,7 @@ namespace Lab2 {
                 int clueLength = value.Length;
                 int minClueLength = 1;
                 int maxClueLength = 250;
+                //Valid clue -> any String value with length between 1-250.
                 if(clueLength >= minClueLength && clueLength <= maxClueLength) {
                     clue = value;
                 } else {
@@ -47,6 +50,7 @@ namespace Lab2 {
                 int answerLength = value.Length;
                 int minAnswerLength = 1;
                 int maxAnswerLength = 25;
+                //Valid answer -> any String value with length between 1-25.
                 if(answerLength >= minAnswerLength || answerLength <= maxAnswerLength) {
                     answer = value;
                 } else {
@@ -59,6 +63,7 @@ namespace Lab2 {
             get { return difficulty; }
             set {
                 int[] validDifficulties = { 0, 1, 2 };
+                //Valid difficulty -> any int with a value of 0, 1, or 2.
                 if(validDifficulties.Contains(value)) {
                     difficulty = value;
                 } else {
@@ -75,6 +80,7 @@ namespace Lab2 {
                                                         System.Globalization.CultureInfo.InvariantCulture,
                                                         System.Globalization.DateTimeStyles.None,
                                                         out _);
+                //Valid date -> any String with a date format of mm/dd/yyyy.
                 if (validDate) {
                     date = value;
                 } else {
@@ -83,6 +89,16 @@ namespace Lab2 {
             }
         }
 
+        /**
+         * Entry constructor. Will only set the values to what is passed in if they meet 
+         * the setter requirements.
+         * 
+         * @param int id -> Entry id (any value over 0)
+         * @param String clue -> Entry clue (any value with length between 1-250)
+         * @param String answer -> Entry answer (any value with length between 1-25)
+         * @param int difficulty -> Entry difficulty (any value that's either 0, 1, or 2)
+         * @param String date -> Entry date (any value with date format mm/dd/yyyy)
+         */
         public Entry(int id, String clue, String answer, int difficulty, String date) {
             Id = id;
             Clue = clue;
