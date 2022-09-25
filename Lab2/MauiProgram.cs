@@ -2,7 +2,7 @@
 
 
 /**
- * Names: Brady Braun & Wil LaLonde
+ * Names: Brady Braun and Wil LaLonde
  * Description: Lab 2
  * Date: 9/22/2022
  * Bugs: Not sure yet.

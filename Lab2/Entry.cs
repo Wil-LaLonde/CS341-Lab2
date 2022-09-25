@@ -1,9 +1,12 @@
-﻿namespace Lab2 {
-    [Serializable()]
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Text;
+
+namespace Lab2 {
     /**
      * The Entry class represents different crossword entries.
      */
-    public class Entry {
+    [Serializable()]
+    public class Entry : ObservableObject {
         //Instance variables used for getters/setters.
         private int id;
         private String clue;
@@ -11,20 +14,23 @@
         private int difficulty;
         private String date;
 
+        //Difficulty options.
+        public readonly int[] DifficultyIntOptions = { 0, 1, 2 };
+        public readonly String[] DifficultyStringOptions = { "Easy", "Medium", "Hard" };
+
         //Invalid entry constants.
         public const int InvalidIdEntry = 0;
         public const int InvalidDifficultyEntry = -1;
         public const String InvalidStringEntry = "";
 
-        
         public int Id {
             get { return id; }
             set {
                 //Valid id -> any int value that is greater than 0.
                 if(value > InvalidIdEntry) {
-                    id = value;
+                    SetProperty(ref id, value);
                 } else {
-                    id = InvalidIdEntry;
+                    SetProperty(ref id, InvalidIdEntry);
                 }
             }
         }
@@ -37,9 +43,9 @@
                 int maxClueLength = 250;
                 //Valid clue -> any String value with length between 1-250.
                 if(clueLength >= minClueLength && clueLength <= maxClueLength) {
-                    clue = value;
+                    SetProperty(ref clue, value);
                 } else {
-                    clue = InvalidStringEntry;
+                    SetProperty(ref clue, InvalidStringEntry);
                 }
             }
         }
@@ -52,9 +58,9 @@
                 int maxAnswerLength = 25;
                 //Valid answer -> any String value with length between 1-25.
                 if(answerLength >= minAnswerLength || answerLength <= maxAnswerLength) {
-                    answer = value;
+                    SetProperty(ref answer, value);
                 } else {
-                    answer = InvalidStringEntry;
+                    SetProperty(ref answer, InvalidStringEntry);
                 }
             }
         }
@@ -62,12 +68,11 @@
         public int Difficulty {
             get { return difficulty; }
             set {
-                int[] validDifficulties = { 0, 1, 2 };
                 //Valid difficulty -> any int with a value of 0, 1, or 2.
-                if(validDifficulties.Contains(value)) {
-                    difficulty = value;
+                if(DifficultyIntOptions.Contains(value)) {
+                    SetProperty(ref difficulty, value);
                 } else {
-                    difficulty = InvalidDifficultyEntry;
+                    SetProperty(ref difficulty, InvalidDifficultyEntry);
                 }
             }
         }
@@ -82,9 +87,9 @@
                                                         out _);
                 //Valid date -> any String with a date format of mm/dd/yyyy.
                 if (validDate) {
-                    date = value;
+                    SetProperty(ref date, value);
                 } else {
-                    date = InvalidStringEntry;
+                    SetProperty(ref date, InvalidStringEntry);
                 }
             }
         }
@@ -105,6 +110,30 @@
             Answer = answer;
             Difficulty = difficulty;
             Date = date;
+        }
+
+        /**
+         * ToString method to print an Entry in a better way.
+         * Ex: answer - clue - mm/dd/yyyy - difficulty in String format
+         * 
+         * @return String Entry in a neat String format
+         */
+        public override string ToString() {
+            StringBuilder entryStringBuilder = new StringBuilder();
+            entryStringBuilder.Append(answer);
+            entryStringBuilder.Append(DataConstants.SpaceDashSpace);
+            entryStringBuilder.Append(clue);
+            entryStringBuilder.Append(DataConstants.SpaceDashSpace);
+            entryStringBuilder.Append(date);
+            entryStringBuilder.Append(DataConstants.SpaceDashSpace);
+            if (DifficultyIntOptions[DataConstants.Zero].Equals(difficulty)) {
+                entryStringBuilder.Append(DifficultyStringOptions[DataConstants.Zero]);
+            } else if (DifficultyIntOptions[DataConstants.One].Equals(difficulty)) {
+                entryStringBuilder.Append(DifficultyStringOptions[DataConstants.One]);
+            } else if (DifficultyIntOptions[DataConstants.Two].Equals(difficulty)) {
+                entryStringBuilder.Append(DifficultyStringOptions[DataConstants.Two]);
+            }
+            return entryStringBuilder.ToString();
         }
     }
 }

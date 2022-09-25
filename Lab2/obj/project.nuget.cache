@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "7RcDhUf+HGNdIkqeMV+2iaG0GMC1t+u9VUBl3sqRVXcVW7SK043rtjolqw6/oTQ1MXBeGaAK3pMfG1Q3BAFpgg==",
+  "dgSpecHash": "qAXp1DVq4qq9CDdM1cnaB15sGnrxGinoAJ9wPeZLKFrlFhNC7rjvepmS5i8y/0LpqvZJEo1NG4P5ctduQensgg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\wik99\\Desktop\\Computer Science\\Software Engineering\\Lab2\\Lab2.csproj",
+  "projectFilePath": "C:\\Users\\wik99\\git\\CS341-Lab2\\Lab2\\Lab2.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\wik99\\.nuget\\packages\\communitytoolkit.mvvm\\8.0.0\\communitytoolkit.mvvm.8.0.0.nupkg.sha512",
     "C:\\Users\\wik99\\.nuget\\packages\\googlegson\\2.9.0.1\\googlegson.2.9.0.1.nupkg.sha512",
     "C:\\Users\\wik99\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.1\\microsoft.extensions.configuration.6.0.1.nupkg.sha512",
     "C:\\Users\\wik99\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",

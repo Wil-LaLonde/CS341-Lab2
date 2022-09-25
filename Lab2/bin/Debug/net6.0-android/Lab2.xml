@@ -4,6 +4,153 @@
         <name>Lab2</name>
     </assembly>
     <members>
+        <member name="T:Lab2.BusinessLogic">
+            BusinessLogic class that checks all user input from the UI.
+            This will return messaging regarding if the values from the UI
+            are correct or not. It will also notify the UI if any "database"
+            errors occur.
+        </member>
+        <member name="M:Lab2.BusinessLogic.#ctor">
+            BusinessLogic constructor that creates a new object
+            of the FlatDatabase.
+        </member>
+        <member name="M:Lab2.BusinessLogic.GetEntries">
+            GetEntries gets all the entries from the "database"
+            
+            @return Collection of Entries
+        </member>
+        <member name="M:Lab2.BusinessLogic.AddEntry(System.String,System.String,System.String,System.String)">
+            AddEntry takes in all the parameters needed to create a new Entry and
+            and adding it to the "database".
+            
+            @param String clue -> Entry clue
+            @param String answer -> Entry answer
+            @param String difficulty -> Entry difficulty
+            @param String date -> Entry date
+            @return String validationMessage -> success/error message(s)
+        </member>
+        <member name="M:Lab2.BusinessLogic.DeleteEntry(System.Int32)">
+            DeleteEntry takes in an id value to try and delete from the "database".
+            
+            @param int id -> Entry id to delete
+            @return String validationMessage -> success/error message(s)
+        </member>
+        <member name="M:Lab2.BusinessLogic.EditEntry(System.String,System.String,System.String,System.String,System.Int32)">
+            EditEntry takes in all the parameters needed to create a new Entry. This new
+            Entry will replace whatever is currently in the "database" if it exists.
+            
+            @param String clue -> Entry clue
+            @param String answer -> Entry answer
+            @param String difficulty -> Entry difficulty
+            @param String date -> Entry date
+            @param int id -> Entry id to edit
+            @return String validationMessage -> success/error messagees(s)
+        </member>
+        <member name="M:Lab2.BusinessLogic.CreateEntry(System.String,System.String,System.String,System.String,System.Int32)">
+            CreateEntry takes in all the needed parameters to create a new Entry.
+            This will also create a new id if needed and parse the difficulty.
+            
+            @param String clue -> Entry clue
+            @param String answer -> Entry answer
+            @param String difficultyStr -> Entry difficulty
+            @param String date -> Entry date
+            @param (optional) int id -> Entry id
+            @return Entry newEntry
+        </member>
+        <member name="M:Lab2.BusinessLogic.DoesEntryExist(System.Int32)">
+            DoesEntryExist takes in an id and checks if it exists 
+            in the "database". We can use the list size to check
+            if the id exists or not.
+            
+            @param int id -> Entry id
+            @return true/false
+        </member>
+        <member name="M:Lab2.BusinessLogic.CheckInputEntry(Lab2.Entry)">
+            CheckInputEntry takes in an Entry and checks if all
+            the values were set correctly. If so, it will return 
+            that it is a valid Entry. If not, it will return all 
+            the errors seperated by a comma and space.
+            
+            @param Entry inputEntry -> Entry to parse
+            @return String success/error message(s)
+        </member>
+        <member name="T:Lab2.DataConstants">
+            DataConstants class holds all values used throughout Lab2. This
+            is to ensure there are not "magic" values floating around.
+        </member>
+        <member name="T:Lab2.Entry">
+            The Entry class represents different crossword entries.
+        </member>
+        <member name="M:Lab2.Entry.#ctor(System.Int32,System.String,System.String,System.Int32,System.String)">
+            Entry constructor. Will only set the values to what is passed in if they meet 
+            the setter requirements.
+            
+            @param int id -> Entry id (any value over 0)
+            @param String clue -> Entry clue (any value with length between 1-250)
+            @param String answer -> Entry answer (any value with length between 1-25)
+            @param int difficulty -> Entry difficulty (any value that's either 0, 1, or 2)
+            @param String date -> Entry date (any value with date format mm/dd/yyyy)
+        </member>
+        <member name="M:Lab2.Entry.ToString">
+            ToString method to print an Entry in a better way.
+            Ex: answer - clue - mm/dd/yyyy - difficulty in String format
+            
+            @return String Entry in a neat String format
+        </member>
+        <member name="T:Lab2.FlatDatabase">
+            FlatDatabase class gets, adds, deletes, and edits different 
+            entries in the "database".
+        </member>
+        <member name="M:Lab2.FlatDatabase.#ctor">
+            FlatDatabase constructor that gets all the stored entries on application
+            start up. This is stored in a list so we're not accessing the "database"
+            every time.
+        </member>
+        <member name="M:Lab2.FlatDatabase.GetStoredEntries">
+            GetStoredEntries gets all the entries from the "database"
+            
+            @return Collection of Entries
+        </member>
+        <member name="M:Lab2.FlatDatabase.GetEntries">
+            GetEntries gets all the current entries in the list.
+            
+            @return Collection of Entries
+        </member>
+        <member name="M:Lab2.FlatDatabase.GetCurrentCollectionSize">
+            GetCurrentCollectionSize returns the current size of the list.
+            
+            @return int Entries list size
+        </member>
+        <member name="M:Lab2.FlatDatabase.AddEntry(Lab2.Entry)">
+            AddEntry takes in an Entry and adds it to the "database".
+            
+            @param Entry entry to add
+            @return true/false
+        </member>
+        <member name="M:Lab2.FlatDatabase.DeleteEntry(System.Int32)">
+            DeleteEntry takes in an Entry id and deletes it from the "database".
+            
+            @param int Entry id to delete
+            @return true/false
+        </member>
+        <member name="M:Lab2.FlatDatabase.EditEntry(Lab2.Entry,System.Int32)">
+            EditEntry takes in an Entry and Entry id and edits the one in the "database".
+            
+            @param Entry entry to edit
+            @param int Entry id to edit
+            @return true/false
+        </member>
+        <member name="M:Lab2.FlatDatabase.WriteCurrentDataToFile">
+            WriteCurrentDataToFile updates the "database" with the newest version of the Entries list.
+            
+            @return true/false
+        </member>
+        <member name="T:Lab2.IBusinessLogic">
+            IBusinessLogic interface. 
+        </member>
+        <member name="T:Lab2.IDatabase">
+            IDatabase interface.
+        </member>
         <!-- Badly formed XML comment ignored for member "T:Lab2.MauiProgram" -->
     </members>
 </doc>

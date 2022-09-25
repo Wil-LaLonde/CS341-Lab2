@@ -7,7 +7,10 @@
         //General Items START
         public const int Zero = 0;
         public const int One = 1;
+        public const int Two = 2;
         public const String CommaSpace = ", ";
+        public const String SpaceDashSpace = " - ";
+        public const String DisplayAlertOK = "OK";
         //General Items END
         //Error Message Types START
         public const String InvalidIdErrorMessage = "InvalidIdEntry";
@@ -19,6 +22,12 @@
         public const String DatabaseAddErrorMessage = "DatabaseAddError";
         public const String DatabaseDeleteErrorMessage = "DatabaseDeleteError";
         public const String DatabaseEditErrorMessage = "DatabaseEditError";
+        public const String UIAddEntryErrorHeader = "Add Entry Error...";
+        public const String UIAddEntryErrorBody = "An error occurred while adding entry: ";
+        public const String UIDeleteEntryErrorHeader = "Delete Entry Error...";
+        public const String UIDeleteEntryErrorBody = "An error occurred while deleting entry: ";
+        public const String UIEditEntryErrorHeader = "Edit Entry Error...";
+        public const String UIEditEntryErrorBody = "An error occurred while editing entry: ";
         //Error Message Types END
     }
 }
