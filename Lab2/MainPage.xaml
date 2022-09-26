@@ -47,7 +47,7 @@
                         Clicked="EditEntryButtonClick"/>
                 </VerticalStackLayout>
                 <!-- Adding list for all the different Entries -->
-                <ListView x:Name="EntryList">
+                <ListView x:Name="EntryList" SelectionMode="Single">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -55,13 +55,30 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Text="{Binding Entry.ToString}"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </HorizontalStackLayout>
+            <!-- Some new stack here maybe that would hold all the text entries? -->
+            <HorizontalStackLayout Margin="20">
+                <!-- Clue Entry -->
+                <Label VerticalOptions="Center" Text="Clue: "/>
+                <Entry x:Name="ClueEntry" Placeholder="Clue goes here..." PlaceholderColor="LightGray" WidthRequest="500"/>
+                <!-- Answer Entry -->
+                <Label VerticalOptions="Center" Text="Answer: "/>
+                <Entry x:Name="AnswerEntry" Placeholder="Answer goes here..." PlaceholderColor="LightGray" WidthRequest="500"/>
+                <HorizontalStackLayout>
+                    <!-- Difficulty Entry -->
+                    <Label VerticalOptions="Center" Text="Difficulty: "/>
+                    <Entry x:Name="DifficultyEntry" Placeholder="#" PlaceholderColor="LightGray" WidthRequest="250" />
+                    <!-- Date Entry -->
+                    <Label VerticalOptions="Center" Text="Date: "/>
+                    <Entry x:Name="DateEntry" Placeholder="mm/dd/yyyy" PlaceholderColor="LightGray" WidthRequest="250"/>
+                </HorizontalStackLayout>
+            </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

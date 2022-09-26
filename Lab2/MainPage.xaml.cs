@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-namespace Lab2;
 
+namespace Lab2;
 public partial class MainPage : ContentPage {
 	private ObservableCollection<Entry> entries = new ObservableCollection<Entry>();
 	private IBusinessLogic businessLogic;
@@ -10,27 +10,58 @@ public partial class MainPage : ContentPage {
 		//Might have to set our entries list here???
 	}
 	private void AddEntryButtonClick(Object sender, EventArgs e) {
-		//Add logic here to add the entry (call businessLogic)
-		
-		//Testing the Entry stuff
-		int id = 0;
-		String clue = "";
-		String answer = "";
-		String difficulty = "";
-		String date = "";
-		//Need to check the difficulty first
-		int difficultyInt = int.TryParse(difficulty, out difficultyInt) ? difficultyInt : Entry.InvalidDifficultyEntry;
-
-		Entry testEntry = new Entry(id, clue, answer, difficultyInt, date);
-		bool test = false;
+		//Getting input from the user interface.
+		String clueStr = ClueEntry.Text;
+		String answerStr = AnswerEntry.Text;
+		String difficultyStr = DifficultyEntry.Text;
+		String dateStr = DateEntry.Text;
+		//Calling businessLogic to try and add the entry.
+		String validationMessage = businessLogic.AddEntry(clueStr, answerStr, difficultyStr, dateStr);
+		//Checking to see if it was added successfully.
+		if(IBusinessLogic.SuccessActionMessage.Equals(validationMessage)) {
+			//Do something here to maybe update our list?
+		} else {
+            DisplayCompleteAlert(DataConstants.UIAddEntryErrorHeader, DataConstants.UIAddEntryErrorBody, validationMessage);
+        }
 	}
 
 	private void DeleteEntryButtonClick(Object sender, EventArgs e) {
-		//Delete logic here to delete the entry (call businessLogic)
+		//Getting input from the user interface (what entry is selected)
+		Entry selectedEntry = (Entry) EntryList.SelectedItem;
+		int id = selectedEntry.Id;
+		//Calling businessLogic to try and delete the entry.
+		String validationMessage = businessLogic.DeleteEntry(id);
+		//Checking to see if it was deleted successfully.
+		if(IBusinessLogic.SuccessActionMessage.Equals(validationMessage)) {
+			//Do something here to maybe update our list?
+		} else {
+			DisplayCompleteAlert(DataConstants.UIDeleteEntryErrorHeader, DataConstants.UIDeleteEntryErrorBody, validationMessage);
+		}
+		
+
 	}
 
 	private void EditEntryButtonClick(Object sender, EventArgs e) {
-		//Edit logic here to edit the entry (call businessLogic)
+		//Getting input from the user interface (what entry they want to edit).
+		Entry selectedEntry = (Entry)EntryList.SelectedItem;
+		int id = selectedEntry.Id;
+        //Getting values to edit.
+        String clueStr = ClueEntry.Text;
+        String answerStr = AnswerEntry.Text;
+        String difficultyStr = DifficultyEntry.Text;
+        String dateStr = DateEntry.Text;
+		//Calling businessLogic to try and edit the entry.
+		String validationMessage = businessLogic.EditEntry(clueStr, answerStr, difficultyStr, dateStr, id);
+		//Checking to see if it was edited successfully.
+		if(IBusinessLogic.SuccessActionMessage.Equals(validationMessage)) {
+			//Do something here to maybe update our list?
+		} else {
+			DisplayCompleteAlert(DataConstants.UIEditEntryErrorHeader, DataConstants.UIEditEntryErrorBody, validationMessage);
+		}
+    }
+	
+	private void DisplayCompleteAlert(String errorHeader, String errorBody, String errorMessage) {
+		DisplayAlert(errorHeader, errorBody + errorMessage, DataConstants.DisplayAlertOK);
 	}
 }
 
