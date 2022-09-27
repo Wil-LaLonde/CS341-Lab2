@@ -12,6 +12,7 @@
         public const String SpaceDashSpace = " - ";
         public const String DisplayAlertOK = "OK";
         //General Items END
+
         //Error Message Types START
         public const String InvalidIdErrorMessage = "InvalidIdEntry";
         public const String InvalidClueErrorMessage = "InvalidClueLength";
@@ -22,6 +23,7 @@
         public const String DatabaseAddErrorMessage = "DatabaseAddError";
         public const String DatabaseDeleteErrorMessage = "DatabaseDeleteError";
         public const String DatabaseEditErrorMessage = "DatabaseEditError";
+        public const String EntryNotSelectedMessage = "EntryNotSelected";
         public const String UIAddEntryErrorHeader = "Add Entry Error...";
         public const String UIAddEntryErrorBody = "An error occurred while adding entry: ";
         public const String UIDeleteEntryErrorHeader = "Delete Entry Error...";

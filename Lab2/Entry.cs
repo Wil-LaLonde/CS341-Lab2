@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.Text;
 
 namespace Lab2 {
     /**
@@ -14,9 +13,13 @@ namespace Lab2 {
         private int difficulty;
         private String date;
 
-        //Difficulty options.
-        public readonly int[] DifficultyIntOptions = { 0, 1, 2 };
-        public readonly String[] DifficultyStringOptions = { "Easy", "Medium", "Hard" };
+        //Entry constants
+        public const int MinClueLength = 1;
+        public const int MaxClueLength = 250;
+        public const int MinAnswerLength = 1;
+        public const int MaxAnswerLength = 25;
+        public readonly int[] ValidDifficulties = { 0, 1, 2 };
+        public const String DateFormat = "mm/dd/yyyy";
 
         //Invalid entry constants.
         public const int InvalidIdEntry = 0;
@@ -39,10 +42,8 @@ namespace Lab2 {
             get { return clue; }
             set {
                 int clueLength = value.Length;
-                int minClueLength = 1;
-                int maxClueLength = 250;
                 //Valid clue -> any String value with length between 1-250.
-                if(clueLength >= minClueLength && clueLength <= maxClueLength) {
+                if(clueLength >= MinClueLength && clueLength <= MaxClueLength) {
                     SetProperty(ref clue, value);
                 } else {
                     SetProperty(ref clue, InvalidStringEntry);
@@ -54,10 +55,8 @@ namespace Lab2 {
             get { return answer; }
             set {
                 int answerLength = value.Length;
-                int minAnswerLength = 1;
-                int maxAnswerLength = 25;
                 //Valid answer -> any String value with length between 1-25.
-                if(answerLength >= minAnswerLength || answerLength <= maxAnswerLength) {
+                if(answerLength >= MinAnswerLength || answerLength <= MaxAnswerLength) {
                     SetProperty(ref answer, value);
                 } else {
                     SetProperty(ref answer, InvalidStringEntry);
@@ -69,7 +68,7 @@ namespace Lab2 {
             get { return difficulty; }
             set {
                 //Valid difficulty -> any int with a value of 0, 1, or 2.
-                if(DifficultyIntOptions.Contains(value)) {
+                if(ValidDifficulties.Contains(value)) {
                     SetProperty(ref difficulty, value);
                 } else {
                     SetProperty(ref difficulty, InvalidDifficultyEntry);
@@ -80,8 +79,7 @@ namespace Lab2 {
         public String Date {
             get { return date; }
             set {
-                String dateFormat = "mm/dd/yyyy";
-                bool validDate = DateTime.TryParseExact(value, dateFormat,
+                bool validDate = DateTime.TryParseExact(value, DateFormat,
                                                         System.Globalization.CultureInfo.InvariantCulture,
                                                         System.Globalization.DateTimeStyles.None,
                                                         out _);
@@ -110,30 +108,6 @@ namespace Lab2 {
             Answer = answer;
             Difficulty = difficulty;
             Date = date;
-        }
-
-        /**
-         * ToString method to print an Entry in a better way.
-         * Ex: answer - clue - mm/dd/yyyy - difficulty in String format
-         * 
-         * @return String Entry in a neat String format
-         */
-        public override string ToString() {
-            StringBuilder entryStringBuilder = new StringBuilder();
-            entryStringBuilder.Append(Answer);
-            entryStringBuilder.Append(DataConstants.SpaceDashSpace);
-            entryStringBuilder.Append(Clue);
-            entryStringBuilder.Append(DataConstants.SpaceDashSpace);
-            entryStringBuilder.Append(Date);
-            entryStringBuilder.Append(DataConstants.SpaceDashSpace);
-            if (DifficultyIntOptions[DataConstants.Zero].Equals(Difficulty)) {
-                entryStringBuilder.Append(DifficultyStringOptions[DataConstants.Zero]);
-            } else if (DifficultyIntOptions[DataConstants.One].Equals(Difficulty)) {
-                entryStringBuilder.Append(DifficultyStringOptions[DataConstants.One]);
-            } else if (DifficultyIntOptions[DataConstants.Two].Equals(Difficulty)) {
-                entryStringBuilder.Append(DifficultyStringOptions[DataConstants.Two]);
-            }
-            return entryStringBuilder.ToString();
         }
     }
 }

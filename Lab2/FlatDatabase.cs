@@ -7,8 +7,8 @@ namespace Lab2 {
      * entries in the "database".
      */
     public class FlatDatabase : IDatabase {
-        //File name can be changed to whatever.
-        private const String FileName = "UserEntries.txt";
+        private String fileName;
+        private String appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         private ObservableCollection<Entry> entries = new ObservableCollection<Entry>();
 
         /**
@@ -17,10 +17,9 @@ namespace Lab2 {
          * every time.
          */
         public FlatDatabase() {
-            entries.Add(new Entry(1, "fuck", "fuck", 1, "09/10/2000"));
-            entries.Add(new Entry(1, "fuck", "fuck", 1, "09/10/2000"));
-            entries.Add(new Entry(1, "fuck", "fuck", 1, "09/10/2000"));
-            //entries = GetStoredEntries();
+            //File name can be changed to anything.
+            fileName = $"{appDataPath}/UserEntries.json";
+            entries = GetStoredEntries();
         }
 
         /**
@@ -31,8 +30,8 @@ namespace Lab2 {
         private ObservableCollection<Entry> GetStoredEntries() {
             ObservableCollection<Entry> entries = new ObservableCollection<Entry>();
             //Check if the file exists.
-            if (File.Exists(FileName)) {
-                String jsonData = File.ReadAllText(FileName);
+            if (File.Exists(fileName)) {
+                String jsonData = File.ReadAllText(fileName);
                 //If there is data, convert to a list of entries.
                 if (!String.Empty.Equals(jsonData)) {
                     entries = JsonSerializer.Deserialize<ObservableCollection<Entry>>(jsonData);
@@ -98,8 +97,13 @@ namespace Lab2 {
          * @return true/false
          */
         public bool EditEntry(Entry entry, int id) {
-            //Replace the old entry with the new one.
-            entries[id] = entry;
+            //Getting old entry and the given index.
+            Entry storedEntry = entries[id];
+            //Replace all values with the new entry.
+            storedEntry.Clue = entry.Clue;
+            storedEntry.Answer = entry.Answer;
+            storedEntry.Difficulty = entry.Difficulty;
+            storedEntry.Date = entry.Date;
             //Update the "database" and return if it was successful or not.
             return WriteCurrentDataToFile();
         }
@@ -115,7 +119,7 @@ namespace Lab2 {
                 //Try adding the data to the text file.
                 JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
                 String jsonData = JsonSerializer.Serialize(entries, options);
-                File.WriteAllText(FileName, jsonData);
+                File.WriteAllText(fileName, jsonData);
                 successFlatDatabaseCall = true;
             } catch(Exception) {
                 //If anything happens, return that it failed.

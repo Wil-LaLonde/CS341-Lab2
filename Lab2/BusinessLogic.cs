@@ -18,7 +18,7 @@ namespace Lab2 {
         public BusinessLogic() {
             flatDatabase = new FlatDatabase();
         }
-
+        
         /**
          * GetEntries gets all the entries from the "database"
          * 
