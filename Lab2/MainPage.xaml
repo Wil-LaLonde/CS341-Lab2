@@ -1,84 +1,104 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Lab2.MainPage">
-    <ScrollView>
-        <VerticalStackLayout>
-            <Label 
+    <VerticalStackLayout>
+        <ListView x:Name="EntryList" SelectionMode="Single">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid RowSpacing="10" ColumnSpacing="10" Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Entry}"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Label 
                 Text="Clue Compendium" 
                 FontSize="75"
                 FontAttributes="Bold"
                 HorizontalTextAlignment="Center"
                 Margin="0, 10, 0, 50"/>
-            <HorizontalStackLayout>
-                <!-- Houses buttons (Add Entry, Delete Entry, Edit Entry) -->
-                <VerticalStackLayout>
-                    <Button
+        <HorizontalStackLayout>
+            <!-- Houses buttons (Add Entry, Delete Entry, Edit Entry) -->
+            <VerticalStackLayout WidthRequest="250">
+                <Button
                         x:Name="AddEntryButton"
                         Text="Add Entry"
                         TextColor="Black"
-                        FontSize="25"
+                        FontSize="30"
                         BackgroundColor="LightGray"
                         BorderWidth="2"
                         BorderColor="Black"
-                        Padding="25"
+                        CornerRadius="0"
+                        Padding="10"
                         Margin="10"
                         Clicked="AddEntryButtonClick"/>
-                    <Button
+                <Button
                         x:Name="DeleteEntryButton"
                         Text="Delete Entry"
                         TextColor="Black"
-                        FontSize="25"
+                        FontSize="30"
                         BackgroundColor="LightGray"
                         BorderWidth="2"
                         BorderColor="Black"
-                        Padding="25"
+                        CornerRadius="0"
+                        Padding="10"
                         Margin="10"
                         Clicked="DeleteEntryButtonClick"/>
-                    <Button
+                <Button
                         x:Name="EditEntryButton"
                         Text="Edit Entry"
                         TextColor="Black"
-                        FontSize="25"
+                        FontSize="30"
                         BackgroundColor="LightGray"
                         BorderWidth="2"
                         BorderColor="Black"
-                        Padding="25"
+                        CornerRadius="0"
+                        Padding="10"
                         Margin="10"
                         Clicked="EditEntryButtonClick"/>
-                </VerticalStackLayout>
-                <!-- Adding list for all the different Entries -->
-                <ListView x:Name="EntryList" SelectionMode="Single">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Label Grid.Row="0" Text="{Binding Entry.ToString}"/>
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </HorizontalStackLayout>
-            <!-- Some new stack here maybe that would hold all the text entries? -->
-            <HorizontalStackLayout Margin="20">
+            </VerticalStackLayout>
+            
+            <!-- Adding list for all the different Entries -->
+           
+        </HorizontalStackLayout>
+        <!-- Some new stack here maybe that would hold all the text entries? -->
+        <Frame Margin="10" BorderColor="Black" CornerRadius="0">
+            <VerticalStackLayout Spacing="10">
                 <!-- Clue Entry -->
-                <Label VerticalOptions="Center" Text="Clue: "/>
-                <Entry x:Name="ClueEntry" Placeholder="Clue goes here..." PlaceholderColor="LightGray" WidthRequest="500"/>
-                <!-- Answer Entry -->
-                <Label VerticalOptions="Center" Text="Answer: "/>
-                <Entry x:Name="AnswerEntry" Placeholder="Answer goes here..." PlaceholderColor="LightGray" WidthRequest="500"/>
-                <HorizontalStackLayout>
-                    <!-- Difficulty Entry -->
-                    <Label VerticalOptions="Center" Text="Difficulty: "/>
-                    <Entry x:Name="DifficultyEntry" Placeholder="#" PlaceholderColor="LightGray" WidthRequest="250" />
-                    <!-- Date Entry -->
-                    <Label VerticalOptions="Center" Text="Date: "/>
-                    <Entry x:Name="DateEntry" Placeholder="mm/dd/yyyy" PlaceholderColor="LightGray" WidthRequest="250"/>
+                <HorizontalStackLayout Spacing="10" >
+                    <Label VerticalOptions="Center" Text="Clue: " FontSize="20" FontAttributes="Bold" WidthRequest="100"/>
+                    <Frame BorderColor="Black" CornerRadius="0" Padding="5">
+                        <Entry x:Name="ClueEntry" Placeholder="Clue goes here..." FontSize="20" PlaceholderColor="LightGray" WidthRequest="720"/>
+                    </Frame>
                 </HorizontalStackLayout>
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
-    </ScrollView>
+                <!-- Answer Entry -->
+                <HorizontalStackLayout Spacing="10">
+                    <Label VerticalOptions="Center" Text="Answer: " FontSize="20" FontAttributes="Bold" WidthRequest="100"/>
+                    <Frame BorderColor="Black" CornerRadius="0" Padding="5">
+                        <Entry x:Name="AnswerEntry" Placeholder="Answer goes here..." FontSize="20" PlaceholderColor="LightGray" WidthRequest="720"/>
+                    </Frame>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="10">
+                    <!-- Difficulty Entry -->
+                    <Label VerticalOptions="Center" Text="Difficulty: " FontSize="20" FontAttributes="Bold" WidthRequest="100"/>
+                    <Frame BorderColor="Black" CornerRadius="0" Padding="5">
+                        <Entry x:Name="DifficultyEntry" Placeholder="#" FontSize="20" PlaceholderColor="LightGray" WidthRequest="100"/>
+                    </Frame>
+                    <!-- Date Entry -->
+                    <Label VerticalOptions="Center" Text="Date: " FontSize="20" FontAttributes="Bold" WidthRequest="100"/>
+                    <Frame BorderColor="Black" CornerRadius="0" Padding="5">
+                        <Entry x:Name="DateEntry" Placeholder="mm/dd/yyyy" FontSize="20" PlaceholderColor="LightGray" WidthRequest="200"/>
+                    </Frame>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Frame>
+    </VerticalStackLayout>
 </ContentPage>

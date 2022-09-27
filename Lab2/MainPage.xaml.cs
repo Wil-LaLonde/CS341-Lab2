@@ -7,14 +7,16 @@ public partial class MainPage : ContentPage {
 	public MainPage() {
 		InitializeComponent();
 		businessLogic = new BusinessLogic();
+		entries = businessLogic.GetEntries();
+		EntryList.ItemsSource = entries;
 		//Might have to set our entries list here???
 	}
 	private void AddEntryButtonClick(Object sender, EventArgs e) {
 		//Getting input from the user interface.
-		String clueStr = ClueEntry.Text;
-		String answerStr = AnswerEntry.Text;
-		String difficultyStr = DifficultyEntry.Text;
-		String dateStr = DateEntry.Text;
+		String clueStr = ClueEntry.Text ?? String.Empty;
+		String answerStr = AnswerEntry.Text ?? String.Empty;
+		String difficultyStr = DifficultyEntry.Text ?? String.Empty;
+		String dateStr = DateEntry.Text ?? String.Empty;
 		//Calling businessLogic to try and add the entry.
 		String validationMessage = businessLogic.AddEntry(clueStr, answerStr, difficultyStr, dateStr);
 		//Checking to see if it was added successfully.
@@ -46,10 +48,10 @@ public partial class MainPage : ContentPage {
 		Entry selectedEntry = (Entry)EntryList.SelectedItem;
 		int id = selectedEntry.Id;
         //Getting values to edit.
-        String clueStr = ClueEntry.Text;
-        String answerStr = AnswerEntry.Text;
-        String difficultyStr = DifficultyEntry.Text;
-        String dateStr = DateEntry.Text;
+        String clueStr = ClueEntry.Text ?? String.Empty;
+        String answerStr = AnswerEntry.Text ?? String.Empty;
+        String difficultyStr = DifficultyEntry.Text ?? String.Empty;
+        String dateStr = DateEntry.Text ?? String.Empty;
 		//Calling businessLogic to try and edit the entry.
 		String validationMessage = businessLogic.EditEntry(clueStr, answerStr, difficultyStr, dateStr, id);
 		//Checking to see if it was edited successfully.

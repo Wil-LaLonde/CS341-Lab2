@@ -17,7 +17,10 @@ namespace Lab2 {
          * every time.
          */
         public FlatDatabase() {
-            entries = GetStoredEntries();
+            entries.Add(new Entry(1, "fuck", "fuck", 1, "09/10/2000"));
+            entries.Add(new Entry(1, "fuck", "fuck", 1, "09/10/2000"));
+            entries.Add(new Entry(1, "fuck", "fuck", 1, "09/10/2000"));
+            //entries = GetStoredEntries();
         }
 
         /**

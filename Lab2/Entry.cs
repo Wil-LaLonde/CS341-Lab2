@@ -120,17 +120,17 @@ namespace Lab2 {
          */
         public override string ToString() {
             StringBuilder entryStringBuilder = new StringBuilder();
-            entryStringBuilder.Append(answer);
+            entryStringBuilder.Append(Answer);
             entryStringBuilder.Append(DataConstants.SpaceDashSpace);
-            entryStringBuilder.Append(clue);
+            entryStringBuilder.Append(Clue);
             entryStringBuilder.Append(DataConstants.SpaceDashSpace);
-            entryStringBuilder.Append(date);
+            entryStringBuilder.Append(Date);
             entryStringBuilder.Append(DataConstants.SpaceDashSpace);
-            if (DifficultyIntOptions[DataConstants.Zero].Equals(difficulty)) {
+            if (DifficultyIntOptions[DataConstants.Zero].Equals(Difficulty)) {
                 entryStringBuilder.Append(DifficultyStringOptions[DataConstants.Zero]);
-            } else if (DifficultyIntOptions[DataConstants.One].Equals(difficulty)) {
+            } else if (DifficultyIntOptions[DataConstants.One].Equals(Difficulty)) {
                 entryStringBuilder.Append(DifficultyStringOptions[DataConstants.One]);
-            } else if (DifficultyIntOptions[DataConstants.Two].Equals(difficulty)) {
+            } else if (DifficultyIntOptions[DataConstants.Two].Equals(Difficulty)) {
                 entryStringBuilder.Append(DifficultyStringOptions[DataConstants.Two]);
             }
             return entryStringBuilder.ToString();
